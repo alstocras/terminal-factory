@@ -12,6 +12,7 @@ int main() {
   // colours!!
   start_color();
   init_pair(1, COLOR_RED, COLOR_BLACK);
+  init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 
   // get centre
   int y, x;

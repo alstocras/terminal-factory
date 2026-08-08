@@ -1,5 +1,9 @@
+#include <iostream>
 #include <ncurses.h>
 #include <string>
+#include <vector>
+
+using namespace std;
 
 // main function
 int main() {
@@ -17,6 +21,15 @@ int main() {
   // get centre
   int y, x;
   getmaxyx(stdscr, y, x);
+
+  // map
+  vector<int> map;
+
+  for (int yi = 0; yi < y; yi++) {
+    for (int xi = 0; xi < x; xi++) {
+      map.push_back(0);
+    }
+  }
 
   // divide by 2
   y = y * 0.5;

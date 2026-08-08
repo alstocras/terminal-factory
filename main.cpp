@@ -26,13 +26,12 @@ int main() {
 
   // set positon
   int pos[2] = {centre[0], centre[1]};
-  char *icon = ">";
 
   // turn on player colour
   attron(COLOR_PAIR(1));
 
   // print character
-  mvwprintw(stdscr, centre[0], centre[1], icon);
+  mvwprintw(stdscr, centre[0], centre[1], ">");
 
   // refresh
   refresh();
@@ -46,19 +45,48 @@ int main() {
     // game loop
 
     // clear all text
-    erase();
+    // erase();
 
-    // movement!!
+    // movement!! (very janky ik)
     if ((ch = getch()) == 'y') {
       pos[0] -= 1;
-      icon = "^";
+
+      // render and refresh
+      attron(COLOR_PAIR(1));
+      mvwprintw(stdscr, pos[0], pos[1], "^");
+      refresh();
+      attroff(COLOR_PAIR(1));
     }
 
-    // render and refresh
-    attron(COLOR_PAIR(1));
-    mvwprintw(stdscr, pos[0], pos[1], icon);
-    refresh();
-    attroff(COLOR_PAIR(1));
+    else if ((ch = getch()) == 'i') {
+      pos[0] += 1;
+
+      // render and refresh
+      attron(COLOR_PAIR(1));
+      mvwprintw(stdscr, pos[0], pos[1], "v");
+      refresh();
+      attroff(COLOR_PAIR(1));
+    }
+
+    else if ((ch = getch()) == 'c') {
+      pos[1] -= 2;
+
+      // render and refresh
+      attron(COLOR_PAIR(1));
+      mvwprintw(stdscr, pos[0], pos[1], "<");
+      refresh();
+      attroff(COLOR_PAIR(1));
+    }
+
+    else if ((ch = getch()) == 'e') {
+      pos[1] += 2;
+
+      // render and refresh
+      attron(COLOR_PAIR(1));
+      mvwprintw(stdscr, pos[0], pos[1], ">");
+      refresh();
+      attroff(COLOR_PAIR(1));
+    }
   }
 
   // exit

@@ -23,13 +23,18 @@ int main() {
   getmaxyx(stdscr, y, x);
 
   // map
-  vector<int> map;
+  vector<vector<int>> map;
 
+  // fill up map with 0s
   for (int yi = 0; yi < y; yi++) {
+    vector<int> temp;
     for (int xi = 0; xi < x; xi++) {
-      map.push_back(0);
+      temp.push_back(0);
     }
+    map.push_back(temp);
   }
+
+  map[0][0] = 1;
 
   // divide by 2
   y = y * 0.5;
@@ -70,9 +75,7 @@ int main() {
       mvwprintw(stdscr, pos[0], pos[1], "^");
       refresh();
       attroff(COLOR_PAIR(1));
-    }
-
-    else if ((ch = getch()) == 'i') {
+    } else if ((ch = getch()) == 'i') {
       pos[0] += 1;
 
       // render and refresh
@@ -80,9 +83,7 @@ int main() {
       mvwprintw(stdscr, pos[0], pos[1], "v");
       refresh();
       attroff(COLOR_PAIR(1));
-    }
-
-    else if ((ch = getch()) == 'c') {
+    } else if ((ch = getch()) == 'c') {
       pos[1] -= 3;
 
       // render and refresh
@@ -90,9 +91,7 @@ int main() {
       mvwprintw(stdscr, pos[0], pos[1], "<");
       refresh();
       attroff(COLOR_PAIR(1));
-    }
-
-    else if ((ch = getch()) == 'e') {
+    } else if ((ch = getch()) == 'e') {
       pos[1] += 3;
 
       // render and refresh
@@ -100,6 +99,18 @@ int main() {
       mvwprintw(stdscr, pos[0], pos[1], ">");
       refresh();
       attroff(COLOR_PAIR(1));
+    }
+
+    // drawing drills
+    for (int ya; ya < map.size(); ya++) {
+      for (int xa; xa < map.size(); xa++) {
+
+        // render and refresh
+        attron(COLOR_PAIR(2));
+        mvwprintw(stdscr, ya, xa, "*");
+        refresh();
+        attroff(COLOR_PAIR(2));
+      }
     }
   }
 

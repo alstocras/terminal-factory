@@ -102,14 +102,16 @@ int main() {
     }
 
     // drawing drills
-    for (int ya; ya < map.size(); ya++) {
-      for (int xa; xa < map.size(); xa++) {
+    for (int ya = 0; ya < map.size(); ya++) {
+      for (int xa = 0; xa < map.size(); xa++) {
 
-        // render and refresh
-        attron(COLOR_PAIR(2));
-        mvwprintw(stdscr, ya, xa, "*");
-        refresh();
-        attroff(COLOR_PAIR(2));
+        if (map[xa][ya] == 1) {
+          // render and refresh
+          attron(COLOR_PAIR(2));
+          mvwprintw(stdscr, ya, xa, "*");
+          refresh();
+          attroff(COLOR_PAIR(2));
+        }
       }
     }
   }

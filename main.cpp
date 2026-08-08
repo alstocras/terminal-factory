@@ -34,6 +34,7 @@ int main() {
     map.push_back(temp);
   }
 
+  // TODO: remove this temp drill
   map[0][0] = 1;
 
   // divide by 2
@@ -99,6 +100,11 @@ int main() {
       mvwprintw(stdscr, pos[0], pos[1], ">");
       refresh();
       attroff(COLOR_PAIR(1));
+    }
+
+    // drill placement check
+    if ((ch = getch()) == ' ') {
+      map[pos[0]][pos[1]] = 1;
     }
 
     // drawing drills

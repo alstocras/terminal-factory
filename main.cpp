@@ -103,8 +103,9 @@ int main() {
     }
 
     // drill placement check
-    if ((ch = getch()) == ' ') {
+    if ((ch = getch()) == 'p') {
       map[pos[0]][pos[1]] = 1;
+      cout << "drill";
     }
 
     // drawing drills

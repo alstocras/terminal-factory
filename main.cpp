@@ -7,23 +7,36 @@ int main() {
   // ncurses screen stuff
   initscr();
 
-  // colours
+  // colours!!
   start_color();
-  init_pair(1, COLOR_RED, COLOR_BLACK);
-  init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+  init_pair(1, COLOR_YELLOW, COLOR_BLACK);
 
-  // activate 1
+  // get centre
+  int y, x;
+  getmaxyx(stdscr, y, x);
+
+  // divide by 2
+  y = y * 0.5;
+  x = x * 0.5;
+
+  // the ncurses convention is y/x not x/y soooo
+  int centre[2] = {y, x};
+
+  // turn on player colour
   attron(COLOR_PAIR(1));
 
-  // drawing hello world
-  mvwprintw(stdscr, 2, 2, "hello there");
+  // print character
+  mvwprintw(stdscr, centre[0], centre[1], ">");
 
-  // activate 2
-  attron(COLOR_PAIR(2));
+  // turn off colours
+  attroff(COLOR_PAIR(1));
 
-  // drawing another thing
-  mvwprintw(stdscr, 10, 10, "me too");
+  // dont close until keypress
+  getch();
 
-  // reload
-  refresh();
+  // close and clean
+  endwin();
+
+  // its an int function
+  return 0;
 }

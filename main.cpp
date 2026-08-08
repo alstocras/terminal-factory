@@ -11,7 +11,7 @@ int main() {
 
   // colours!!
   start_color();
-  init_pair(1, COLOR_YELLOW, COLOR_BLACK);
+  init_pair(1, COLOR_RED, COLOR_BLACK);
 
   // get centre
   int y, x;
@@ -45,7 +45,7 @@ int main() {
     // game loop
 
     // clear all text
-    // erase();
+    erase();
 
     // movement!! (very janky ik)
     if ((ch = getch()) == 'y') {
@@ -69,7 +69,7 @@ int main() {
     }
 
     else if ((ch = getch()) == 'c') {
-      pos[1] -= 2;
+      pos[1] -= 3;
 
       // render and refresh
       attron(COLOR_PAIR(1));
@@ -79,7 +79,7 @@ int main() {
     }
 
     else if ((ch = getch()) == 'e') {
-      pos[1] += 2;
+      pos[1] += 3;
 
       // render and refresh
       attron(COLOR_PAIR(1));

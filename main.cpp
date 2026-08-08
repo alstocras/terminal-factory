@@ -1,11 +1,11 @@
-#include <iostream>
 #include <ncurses.h>
-#include <vector>
 
 // main function
 int main() {
   // ncurses screen stuff
   initscr();
+  cbreak();
+  noecho();
 
   // colours!!
   start_color();
@@ -28,15 +28,21 @@ int main() {
   // print character
   mvwprintw(stdscr, centre[0], centre[1], ">");
 
+  // refresh
+  refresh();
+
   // turn off colours
   attroff(COLOR_PAIR(1));
 
-  // dont close until keypress
-  getch();
+  // keypress check
+  int ch;
+  while ((ch = getch()) != 'q') {
+    // game loop
+  }
 
-  // close and clean
+  // exit
   endwin();
 
-  // its an int function
+  // return
   return 0;
 }

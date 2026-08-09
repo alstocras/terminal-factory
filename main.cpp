@@ -44,9 +44,6 @@ int main() {
   // set positon
   int pos[2] = {centre[0], centre[1]};
 
-  // TODO: remove this temp drill
-  map[pos[0]][pos[1]] = 1;
-
   // turn on player colour
   attron(COLOR_PAIR(1));
 
@@ -103,9 +100,8 @@ int main() {
     }
 
     // drill placement check
-    if ((ch = getch()) == 'p') {
+    if ((ch = getch()) == ' ') {
       map[pos[0]][pos[1]] = 1;
-      cout << "drill";
     }
 
     // drawing drills

@@ -12,6 +12,10 @@ int main() {
   // seed random gen
   srand(time(0));
 
+  // variables
+  int extractSpeed = 0;
+  float zeroes = 0;
+
   // ncurses screen stuff
   initscr();
   curs_set(0);
@@ -20,10 +24,11 @@ int main() {
 
   // colours!!
   start_color();
-  init_pair(1, COLOR_RED, COLOR_BLACK);
-  init_pair(2, COLOR_YELLOW, COLOR_BLACK);
-  init_pair(3, COLOR_GREEN, COLOR_BLACK);
-  init_pair(4, COLOR_BLACK, COLOR_RED);
+  init_pair(1, COLOR_RED, COLOR_BLACK);    // player
+  init_pair(2, COLOR_YELLOW, COLOR_BLACK); // drills
+  init_pair(3, COLOR_GREEN, COLOR_BLACK);  // ores
+  init_pair(4, COLOR_BLACK, COLOR_RED);    // core
+  init_pair(5, COLOR_YELLOW, COLOR_RED);   // label
 
   // get centre
   int y, x;
@@ -45,8 +50,6 @@ int main() {
   for (int yb = 0; yb < map.size(); yb++) {
     for (int xb = 0; xb < map[yb].size(); xb++) {
       int randomNum = rand() % 50;
-      cout << randomNum;
-
       if (randomNum <= 25) {
         map[yb][xb] = 2;
       } else {
@@ -84,6 +87,14 @@ int main() {
   int ch;
   while ((ch = getch()) != 'q') {
     // game loop
+
+    // incrememnt resources
+    zeroes += extractSpeed / 100;
+
+    // display 0s
+    const char *zStr = ("zeroes: " + to_string(zeroes)).c_str();
+    attron(COLOR_PAIR(5));
+    mvwprintw(stdscr, 0, 0, zStr);
 
     // erase player
     mvwprintw(stdscr, pos[0], pos[1], " ");
@@ -133,7 +144,10 @@ int main() {
 
     // drill placement check
     if ((ch = getch()) == ' ') {
-      map[pos[0]][pos[1]] = 1;
+      if (map[pos[0]][pos[1]] == 2) {
+        extractSpeed += 1;
+        map[pos[0]][pos[1]] = 1;
+      }
     }
 
     // drawing map

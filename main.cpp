@@ -23,6 +23,7 @@ int main() {
   init_pair(1, COLOR_RED, COLOR_BLACK);
   init_pair(2, COLOR_YELLOW, COLOR_BLACK);
   init_pair(3, COLOR_GREEN, COLOR_BLACK);
+  init_pair(4, COLOR_BLACK, COLOR_RED);
 
   // get centre
   int y, x;
@@ -46,7 +47,7 @@ int main() {
       int randomNum = rand() % 50;
       cout << randomNum;
 
-      if (randomNum >= 25) {
+      if (randomNum <= 25) {
         map[yb][xb] = 2;
       } else {
         map[yb][xb] = 0;
@@ -63,6 +64,9 @@ int main() {
 
   // set positon
   int pos[2] = {centre[0], centre[1]};
+
+  // place core
+  map[centre[0]][centre[1]] = 3;
 
   // turn on player colour
   attron(COLOR_PAIR(1));
@@ -86,6 +90,7 @@ int main() {
     refresh();
 
     // movement!! (very janky ik)
+    // up
     if ((ch = getch()) == 'y') {
       pos[0] -= 1;
 
@@ -94,7 +99,9 @@ int main() {
       mvwprintw(stdscr, pos[0], pos[1], "^");
       refresh();
       attroff(COLOR_PAIR(1));
-    } else if ((ch = getch()) == 'i') {
+    }
+    // down
+    else if ((ch = getch()) == 'i') {
       pos[0] += 1;
 
       // render and refresh
@@ -102,7 +109,9 @@ int main() {
       mvwprintw(stdscr, pos[0], pos[1], "v");
       refresh();
       attroff(COLOR_PAIR(1));
-    } else if ((ch = getch()) == 'c') {
+    }
+    // left
+    else if ((ch = getch()) == 'c') {
       pos[1] -= 3;
 
       // render and refresh
@@ -110,7 +119,9 @@ int main() {
       mvwprintw(stdscr, pos[0], pos[1], "<");
       refresh();
       attroff(COLOR_PAIR(1));
-    } else if ((ch = getch()) == 'e') {
+    }
+    // right
+    else if ((ch = getch()) == 'e') {
       pos[1] += 3;
 
       // render and refresh
@@ -129,19 +140,32 @@ int main() {
     for (int ya = 0; ya < map.size(); ya++) {
       for (int xa = 0; xa < map[ya].size(); xa++) {
 
+        // drills
         if (map[ya][xa] == 1) {
           // render and refresh
           attron(COLOR_PAIR(2));
           mvwprintw(stdscr, ya, xa, "*");
           refresh();
           attroff(COLOR_PAIR(2));
-        } else if (map[ya][xa] == 2) {
+        }
+        // ore
+        else if (map[ya][xa] == 2) {
           // render and refresh
           attron(COLOR_PAIR(3));
           mvwprintw(stdscr, ya, xa, "0");
           refresh();
           attroff(COLOR_PAIR(3));
-        } else {
+        }
+        // core
+        else if (map[ya][xa] == 3) {
+          // render and refresh
+          attron(COLOR_PAIR(4));
+          mvwprintw(stdscr, ya, xa, "c");
+          refresh();
+          attroff(COLOR_PAIR(4));
+        }
+        // nothing
+        else {
           mvwprintw(stdscr, ya, xa, " ");
         }
       }

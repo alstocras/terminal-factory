@@ -34,9 +34,6 @@ int main() {
     map.push_back(temp);
   }
 
-  // TODO: remove this temp drill
-  map[0][0] = 1;
-
   // divide by 2
   y = y * 0.5;
   x = x * 0.5;
@@ -46,6 +43,9 @@ int main() {
 
   // set positon
   int pos[2] = {centre[0], centre[1]};
+
+  // TODO: remove this temp drill
+  map[pos[0]][pos[1]] = 1;
 
   // turn on player colour
   attron(COLOR_PAIR(1));
@@ -110,9 +110,9 @@ int main() {
 
     // drawing drills
     for (int ya = 0; ya < map.size(); ya++) {
-      for (int xa = 0; xa < map.size(); xa++) {
+      for (int xa = 0; xa < map[ya].size(); xa++) {
 
-        if (map[xa][ya] == 1) {
+        if (map[ya][xa] == 1) {
           // render and refresh
           attron(COLOR_PAIR(2));
           mvwprintw(stdscr, ya, xa, "*");

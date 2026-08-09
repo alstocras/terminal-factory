@@ -17,6 +17,7 @@ int main() {
   start_color();
   init_pair(1, COLOR_RED, COLOR_BLACK);
   init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+  init_pair(3, COLOR_GREEN, COLOR_BLACK);
 
   // get centre
   int y, x;
@@ -61,8 +62,9 @@ int main() {
   while ((ch = getch()) != 'q') {
     // game loop
 
-    // clear all text
-    erase();
+    // erase player
+    mvwprintw(stdscr, pos[0], pos[1], " ");
+    refresh();
 
     // movement!! (very janky ik)
     if ((ch = getch()) == 'y') {

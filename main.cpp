@@ -1,3 +1,5 @@
+#include <cstddef>
+#include <cstdlib>
 #include <iostream>
 #include <ncurses.h>
 #include <string>
@@ -7,6 +9,9 @@ using namespace std;
 
 // main function
 int main() {
+  // seed random gen
+  srand(time(0));
+
   // ncurses screen stuff
   initscr();
   curs_set(0);
@@ -17,6 +22,8 @@ int main() {
   start_color();
   init_pair(1, COLOR_RED, COLOR_BLACK);
   init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+  init_pair(3, COLOR_GREEN, COLOR_BLACK);
+  init_pair(4, COLOR_BLACK, COLOR_RED);
 
   // get centre
   int y, x;
@@ -34,7 +41,19 @@ int main() {
     map.push_back(temp);
   }
 
-  map[0][0] = 1;
+  // terrain gen
+  for (int yb = 0; yb < map.size(); yb++) {
+    for (int xb = 0; xb < map[yb].size(); xb++) {
+      int randomNum = rand() % 50;
+      cout << randomNum;
+
+      if (randomNum <= 25) {
+        map[yb][xb] = 2;
+      } else {
+        map[yb][xb] = 0;
+      }
+    }
+  }
 
   // divide by 2
   y = y * 0.5;
@@ -45,6 +64,9 @@ int main() {
 
   // set positon
   int pos[2] = {centre[0], centre[1]};
+
+  // place core
+  map[centre[0]][centre[1]] = 3;
 
   // turn on player colour
   attron(COLOR_PAIR(1));
@@ -63,10 +85,12 @@ int main() {
   while ((ch = getch()) != 'q') {
     // game loop
 
-    // clear all text
-    erase();
+    // erase player
+    mvwprintw(stdscr, pos[0], pos[1], " ");
+    refresh();
 
     // movement!! (very janky ik)
+    // up
     if ((ch = getch()) == 'y') {
       pos[0] -= 1;
 
@@ -75,7 +99,9 @@ int main() {
       mvwprintw(stdscr, pos[0], pos[1], "^");
       refresh();
       attroff(COLOR_PAIR(1));
-    } else if ((ch = getch()) == 'i') {
+    }
+    // down
+    else if ((ch = getch()) == 'i') {
       pos[0] += 1;
 
       // render and refresh
@@ -83,7 +109,9 @@ int main() {
       mvwprintw(stdscr, pos[0], pos[1], "v");
       refresh();
       attroff(COLOR_PAIR(1));
-    } else if ((ch = getch()) == 'c') {
+    }
+    // left
+    else if ((ch = getch()) == 'c') {
       pos[1] -= 3;
 
       // render and refresh
@@ -91,7 +119,9 @@ int main() {
       mvwprintw(stdscr, pos[0], pos[1], "<");
       refresh();
       attroff(COLOR_PAIR(1));
-    } else if ((ch = getch()) == 'e') {
+    }
+    // right
+    else if ((ch = getch()) == 'e') {
       pos[1] += 3;
 
       // render and refresh
@@ -101,16 +131,42 @@ int main() {
       attroff(COLOR_PAIR(1));
     }
 
-    // drawing drills
-    for (int ya = 0; ya < map.size(); ya++) {
-      for (int xa = 0; xa < map.size(); xa++) {
+    // drill placement check
+    if ((ch = getch()) == ' ') {
+      map[pos[0]][pos[1]] = 1;
+    }
 
-        if (map[xa][ya] == 1) {
+    // drawing map
+    for (int ya = 0; ya < map.size(); ya++) {
+      for (int xa = 0; xa < map[ya].size(); xa++) {
+
+        // drills
+        if (map[ya][xa] == 1) {
           // render and refresh
           attron(COLOR_PAIR(2));
           mvwprintw(stdscr, ya, xa, "*");
           refresh();
           attroff(COLOR_PAIR(2));
+        }
+        // ore
+        else if (map[ya][xa] == 2) {
+          // render and refresh
+          attron(COLOR_PAIR(3));
+          mvwprintw(stdscr, ya, xa, "0");
+          refresh();
+          attroff(COLOR_PAIR(3));
+        }
+        // core
+        else if (map[ya][xa] == 3) {
+          // render and refresh
+          attron(COLOR_PAIR(4));
+          mvwprintw(stdscr, ya, xa, "c");
+          refresh();
+          attroff(COLOR_PAIR(4));
+        }
+        // nothing
+        else {
+          mvwprintw(stdscr, ya, xa, " ");
         }
       }
     }

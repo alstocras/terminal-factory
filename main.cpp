@@ -43,10 +43,10 @@ int main() {
   // terrain gen
   for (int yb = 0; yb < map.size(); yb++) {
     for (int xb = 0; xb < map[yb].size(); xb++) {
-      int randomNum = rand() % 100;
+      int randomNum = rand() % 50;
       cout << randomNum;
 
-      if (randomNum >= 50) {
+      if (randomNum >= 25) {
         map[yb][xb] = 2;
       } else {
         map[yb][xb] = 0;

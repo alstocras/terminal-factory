@@ -1,3 +1,5 @@
+#include <cstddef>
+#include <cstdlib>
 #include <iostream>
 #include <ncurses.h>
 #include <string>
@@ -7,6 +9,9 @@ using namespace std;
 
 // main function
 int main() {
+  // seed random gen
+  srand(time(0));
+
   // ncurses screen stuff
   initscr();
   curs_set(0);
@@ -33,6 +38,20 @@ int main() {
       temp.push_back(0);
     }
     map.push_back(temp);
+  }
+
+  // terrain gen
+  for (int yb = 0; yb < map.size(); yb++) {
+    for (int xb = 0; xb < map[yb].size(); xb++) {
+      int randomNum = rand() % 100;
+      cout << randomNum;
+
+      if (randomNum >= 50) {
+        map[yb][xb] = 2;
+      } else {
+        map[yb][xb] = 0;
+      }
+    }
   }
 
   // divide by 2
@@ -106,7 +125,7 @@ int main() {
       map[pos[0]][pos[1]] = 1;
     }
 
-    // drawing drills
+    // drawing map
     for (int ya = 0; ya < map.size(); ya++) {
       for (int xa = 0; xa < map[ya].size(); xa++) {
 
@@ -116,6 +135,14 @@ int main() {
           mvwprintw(stdscr, ya, xa, "*");
           refresh();
           attroff(COLOR_PAIR(2));
+        } else if (map[ya][xa] == 2) {
+          // render and refresh
+          attron(COLOR_PAIR(3));
+          mvwprintw(stdscr, ya, xa, "0");
+          refresh();
+          attroff(COLOR_PAIR(3));
+        } else {
+          mvwprintw(stdscr, ya, xa, " ");
         }
       }
     }

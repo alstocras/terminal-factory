@@ -89,12 +89,14 @@ int main() {
     // game loop
 
     // incrememnt resources
-    zeroes += extractSpeed / 100;
+    zeroes += extractSpeed;
 
     // display 0s
-    const char *zStr = ("zeroes: " + to_string(zeroes)).c_str();
+    // const char *zStr = ("zeroes: " + to_string(zeroes)).c_str();
     attron(COLOR_PAIR(5));
-    mvwprintw(stdscr, 0, 0, zStr);
+    mvwprintw(stdscr, 0, 0, to_string(zeroes).c_str());
+    refresh();
+    attroff(COLOR_PAIR(5));
 
     // erase player
     mvwprintw(stdscr, pos[0], pos[1], " ");

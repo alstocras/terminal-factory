@@ -10,6 +10,13 @@ hello! have you ever been sshed into a server or another pc, and wanted to play 
 
 ![vid](demos/videos/main.gif)
 
+## screenshots
+
+![startup](demos/shots/startup.png)
+![drill](demos/shots/drill.png)
+![core](demos/shots/core.png)
+![label](demos/shots/label.png)
+
 ## keybinds
 
 | bind(s) | action |

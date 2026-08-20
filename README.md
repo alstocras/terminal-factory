@@ -40,3 +40,11 @@ so just download the `tf` binary from the repo, then cd next to it and run:
 ``` ./tf ```
 
 enjoy!
+
+## misc stuff
+
+so this is actually my first time making a project in c++ without raylib, and it was really fun. ive used ncurses, a unix tui library, and it was kinda interesting to see how it does stuff.
+
+i like this. but tbh this turned out not to be such a good idea as i was limited to unicode on a grid.
+
+i made this bcs i was just really into tuis and mindustry when i started it, so i ended up combining the 2.

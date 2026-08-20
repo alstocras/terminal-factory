@@ -6,6 +6,10 @@ a TUI factory management game
 
 hello! have you ever been sshed into a server or another pc, and wanted to play a factory management game?? but sadly, you dont have a graphical env!! no worries!! this horrendous terminal factory management should keep you entertained!!
 
+## video of intense gameplay
+
+![vid](demos/videos/main.mp4)
+
 ## keybinds
 
 | bind(s) | action |

@@ -26,6 +26,7 @@ hello! have you ever been sshed into a server or another pc, and wanted to play 
 | c, a | move left |
 | e, d | move right |
 | space | place drill |
+| q, ^c | quit |
 
 ## how to play/run
 

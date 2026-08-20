@@ -8,7 +8,7 @@ hello! have you ever been sshed into a server or another pc, and wanted to play 
 
 ## video of intense gameplay
 
-![vid](demos/videos/main.mp4)
+![vid](demos/videos/main.gif)
 
 ## keybinds
 

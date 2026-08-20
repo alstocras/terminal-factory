@@ -28,7 +28,7 @@ int main() {
   init_pair(2, COLOR_YELLOW, COLOR_BLACK); // drills
   init_pair(3, COLOR_GREEN, COLOR_BLACK);  // ores
   init_pair(4, COLOR_BLACK, COLOR_RED);    // core
-  init_pair(5, COLOR_YELLOW, COLOR_RED);   // label
+  init_pair(5, COLOR_BLACK, COLOR_CYAN);   // label
 
   // get centre
   int y, x;
@@ -113,8 +113,26 @@ int main() {
       refresh();
       attroff(COLOR_PAIR(1));
     }
+    else if ((ch = getch()) == 'w') {
+      pos[0] -= 1;
+
+      // render and refresh
+      attron(COLOR_PAIR(1));
+      mvwprintw(stdscr, pos[0], pos[1], "^");
+      refresh();
+      attroff(COLOR_PAIR(1));
+    }
     // down
     else if ((ch = getch()) == 'i') {
+      pos[0] += 1;
+
+      // render and refresh
+      attron(COLOR_PAIR(1));
+      mvwprintw(stdscr, pos[0], pos[1], "v");
+      refresh();
+      attroff(COLOR_PAIR(1));
+    }
+    else if ((ch = getch()) == 's') {
       pos[0] += 1;
 
       // render and refresh
@@ -133,8 +151,26 @@ int main() {
       refresh();
       attroff(COLOR_PAIR(1));
     }
+    else if ((ch = getch()) == 'a') {
+      pos[1] -= 3;
+
+      // render and refresh
+      attron(COLOR_PAIR(1));
+      mvwprintw(stdscr, pos[0], pos[1], "<");
+      refresh();
+      attroff(COLOR_PAIR(1));
+    }
     // right
     else if ((ch = getch()) == 'e') {
+      pos[1] += 3;
+
+      // render and refresh
+      attron(COLOR_PAIR(1));
+      mvwprintw(stdscr, pos[0], pos[1], ">");
+      refresh();
+      attroff(COLOR_PAIR(1));
+    }
+    else if ((ch = getch()) == 'd') {
       pos[1] += 3;
 
       // render and refresh

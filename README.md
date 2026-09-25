@@ -42,6 +42,13 @@ so just download the `tf` binary from the repo, then cd next to it and run:
 
 enjoy!
 
+## how to install
+
+1. clone the repo
+2. cd into it
+3. run `make userinstall` or `make systeminstall` depending on what you want
+4. execute with `tf`
+
 ## misc stuff
 
 so this is actually my first time making a project in c++ without raylib, and it was really fun. ive used ncurses, a unix tui library, and it was kinda interesting to see how it does stuff.
